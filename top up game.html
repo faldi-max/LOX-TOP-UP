@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOX TOP UP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #1a1a1a;
+      color: white;
+    }
+    .game-list {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 10px 0;
+    }
+    .game {
+      flex: 0 0 auto;
+      width: 100px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .game img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+    }
+    .form-container {
+      margin-top: 30px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      padding: 10px;
+      background: #00c853;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Top Up Game</h1>
+  <h2>LOX TOP UP</h2>
+  <div class="game-list">
+    <div class="game" onclick="showForm('freefire')">
+      <img src="https://i.ibb.co/VjBmfRH/freefire.png" alt="Free Fire">
+      <div>Free Fire</div>
+    </div>
+    <div class="game" onclick="showForm('mlbb')">
+      <img src="https://i.ibb.co/4Zg2nQt/mlbb.png" alt="Mobile Legends">
+      <div>Mobile Legends</div>
+    </div>
+    <div class="game" onclick="showForm('pubg')">
+      <img src="https://i.ibb.co/LJ2qZhY/pubg.png" alt="PUBG Mobile">
+      <div>PUBG Mobile</div>
+    </div>
+    <div class="game" onclick="showForm('hok')">
+      <img src="https://i.ibb.co/Ttb3kYk/honorofkings.png" alt="Honor of Kings">
+      <div>Honor of Kings</div>
+    </div>
+  </div>
+
+  <div class="form-container" id="form-container"></div>
+
+  <script>
+    function showForm(game) {
+      let formHTML = '';
+      switch(game) {
+        case 'freefire':
+          formHTML = `
+            <h2>Top Up Diamond Free Fire</h2>
+            <div class="form-group"><input type="text" id="id" placeholder="ID"></div>
+            <div class="form-group"><input type="text" id="nickname" placeholder="Nickname"></div>
+            <div class="form-group"><select id="jumlah">
+              <option value="5">5 Diamond - Rp. 1000</option>
+            </select></div>
+            <button onclick="orderFF()">Order via WhatsApp</button>`;
+          break;
+        case 'mlbb':
+          formHTML = `
+            <h2>Top Up Diamond Mobile Legends</h2>
+            <div class="form-group"><input type="text" id="id" placeholder="ID"></div>
+            <div class="form-group"><input type="text" id="server" placeholder="ID Server"></div>
+            <div class="form-group"><input type="text" id="nickname" placeholder="Nickname"></div>
+            <div class="form-group"><select id="jumlah">
+              <option value="5">5 Diamond - Rp. 1000</option>
+            </select></div>
+            <button onclick="orderMLBB()">Order via WhatsApp</button>`;
+          break;
+        case 'pubg':
+          formHTML = `
+            <h2>Top Up UC PUBG Mobile</h2>
+            <div class="form-group"><input type="text" id="id" placeholder="ID"></div>
+            <div class="form-group"><input type="text" id="nickname" placeholder="Nickname"></div>
+            <div class="form-group"><select id="jumlah">
+              <option value="5">5 UC - Rp. 1000</option>
+            </select></div>
+            <button onclick="orderPUBG()">Order via WhatsApp</button>`;
+          break;
+        case 'hok':
+          formHTML = `
+            <h2>Top Up Token Honor of Kings</h2>
+            <div class="form-group"><input type="text" id="id" placeholder="ID"></div>
+            <div class="form-group"><input type="text" id="nickname" placeholder="Nickname"></div>
+            <div class="form-group"><select id="jumlah">
+              <option value="5">5 Token - Rp. 1000</option>
+            </select></div>
+            <button onclick="orderHOK()">Order via WhatsApp</button>`;
+          break;
+      }
+      document.getElementById('form-container').innerHTML = formHTML;
+    }
+
+    function orderFF() {
+      const id = document.getElementById('id').value;
+      const nickname = document.getElementById('nickname').value;
+      const jumlah = document.getElementById('jumlah').value;
+      const pesan = `TOP UP DIAMOND FREE FIRE\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA DIAMOND : Rp. 1000\nJUMBLAH DIAMOND: ${jumlah} 💎\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
+      window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
+    }
+
+    function orderMLBB() {
+      const id = document.getElementById('id').value;
+      const server = document.getElementById('server').value;
+      const nickname = document.getElementById('nickname').value;
+      const jumlah = document.getElementById('jumlah').value;
+      const pesan = `TOP UP DIAMOND MOBILE LEGENDS\nID : ${id}\nID SERVER : ${server}\nNICKNAME : ${nickname}\n\nHARGA DIAMOND : Rp. 1000\nJUMBLAH DIAMOND: ${jumlah} 💎\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
+      window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
+    }
+
+    function orderPUBG() {
+      const id = document.getElementById('id').value;
+      const nickname = document.getElementById('nickname').value;
+      const jumlah = document.getElementById('jumlah').value;
+      const pesan = `TOP UP UC PUBG MOBILE\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA UC : Rp. 1000\nJUMBLAH UC: ${jumlah} 💴\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
+      window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
+    }
+
+    function orderHOK() {
+      const id = document.getElementById('id').value;
+      const nickname = document.getElementById('nickname').value;
+      const jumlah = document.getElementById('jumlah').value;
+      const pesan = `TOP UP TOKEN HONOR OF KINGS\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA TOKEN : Rp. 1000\nJUMBLAH TOKEN: ${jumlah} 💷\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
+      window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
+    }
+  </script>
+</body>
+</html>
