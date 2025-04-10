@@ -1,77 +1,157 @@
-<!DOCTYPE html><html lang="id">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LOX TOP UP</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 20px;
-      background-color: #1a1a1a;
+      background: linear-gradient(to right, #1a1a1a, #2e2e2e);
       color: white;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #00ffcc;
+      text-shadow: 1px 1px 2px #000;
+    }
+    h7 {
+      display: block;
+      text-align: center;
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 20px;
     }
     .game-list {
       display: flex;
       overflow-x: auto;
       gap: 15px;
-      padding: 10px 0;
+      padding: 20px 0;
     }
     .game {
       flex: 0 0 auto;
-      width: 100px;
+      width: 90px;
       text-align: center;
       cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .game:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #00ffcc;
     }
     .game img {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       border-radius: 10px;
+      border: 2px solid #00ffcc;
     }
     .form-container {
       margin-top: 30px;
+      background: #292929;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
     }
     .form-group {
       margin-bottom: 15px;
     }
     input, select, textarea {
       width: 100%;
-      padding: 8px;
-      border-radius: 5px;
+      padding: 10px;
+      border-radius: 8px;
       border: none;
+      background: #1f1f1f;
+      color: white;
+    }
+    select option {
+      background-color: #1f1f1f;
     }
     button {
-      padding: 10px;
-      background: #00c853;
+      padding: 12px;
+      background: linear-gradient(to right, #00c853, #00e676);
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: linear-gradient(to right, #00e676, #00c853);
+    }
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .harga-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 16px;
+      padding: 15px;
+    }
+    .harga-card {
+      flex: 0 0 auto;
+      width: 280px;
+      background: linear-gradient(145deg, #2d2d2d, #1c1c1c);
+      border-radius: 12px;
+      text-align: center;
+      padding: 12px;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 255, 204, 0.1);
+      transition: transform 0.2s;
+    }
+    .harga-card:hover {
+      transform: scale(1.03);
+    }
+    .harga-card img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+    .harga-card p {
+      margin: 5px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .harga-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+    .harga-scroll::-webkit-scrollbar-thumb {
+      background-color: #00ffcc;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
-  <h1>Top Up Game</h1>
+  <h1>TOP UP GAME</h1>
   <h2>LOX TOP UP</h2>
+  <h7>Saat Mengisi Format Pastikan Sudah Benar</h7>
   <div class="game-list">
-    <div class="game" onclick="showForm('freefire')">
-      <img src="https://i.ibb.co/VjBmfRH/freefire.png" alt="Free Fire">
+  <div class="game" onclick="showForm('freefire')">
+      <img src="https://files.catbox.moe/gcf8ft.jpg" alt="Free Fire">
       <div>Free Fire</div>
     </div>
     <div class="game" onclick="showForm('mlbb')">
-      <img src="https://i.ibb.co/4Zg2nQt/mlbb.png" alt="Mobile Legends">
+      <img src="https://files.catbox.moe/6qxpl4.png" alt="Mobile Legends">
       <div>Mobile Legends</div>
     </div>
     <div class="game" onclick="showForm('pubg')">
-      <img src="https://i.ibb.co/LJ2qZhY/pubg.png" alt="PUBG Mobile">
+      <img src="https://files.catbox.moe/eq428m.png" alt="PUBG Mobile">
       <div>PUBG Mobile</div>
     </div>
     <div class="game" onclick="showForm('hok')">
-      <img src="https://i.ibb.co/Ttb3kYk/honorofkings.png" alt="Honor of Kings">
+      <img src="https://files.catbox.moe/jll4it.jpg" alt="Honor of Kings">
       <div>Honor of Kings</div>
     </div>
+    <div class="game" onclick="showForm('cod')">
+      <img src="https://files.catbox.moe/nl0n96.jpg" alt="COD Mobile">
+      <div>COD Mobile</div>
+    </div>
   </div>
-
   <div class="form-container" id="form-container"></div>
 
   <script>
@@ -84,9 +164,25 @@
             <div class="form-group"><input type="text" id="id" placeholder="ID"></div>
             <div class="form-group"><input type="text" id="nickname" placeholder="Nickname"></div>
             <div class="form-group"><select id="jumlah">
-              <option value="5">5 Diamond - Rp. 1000</option>
+              <option value=""> Pilih Jumlah Diamond</option>
+              <option value="12">12 Diamond - Rp. 2K</option>
+              <option value="50">50 Diamond - Rp. 7K</option>
+              <option value="70">70 Diamond - Rp. 9.5k</option>
+              <option value="140">140 Diamond - Rp. 18.5k</option>
+              <option value="210">210 Diamond - Rp. 27.5K</option>
+              <option value="355">355 Diamond - Rp. 46K</option>
+              <option value="420">420 Diamond - Rp. 54.5K</option>
+              <option value="500">500 Diamond - Rp. 66K</option>
+              <option value="720">720 Diamond - Rp. 86.5K</option>
+              <option value="800">800 Diamond - Rp. 101.2K</option>
+              <option value="930">930 Diamond - Rp. 117.5K</option>
+              <option value="1000">1000 Diamond - Rp. 126.5K</option>
+              <option value="1450">1450 Diamond - Rp. 181.5K</option>
+              <option value="Membership Mingguan">Membership Mingguan - Rp. 29K</option>
+              <option value="Membership Bulanan">Membership Bulanan - Rp. 88K</option>
+              <option value="Level Up Pass">Level Up Pass - Coming Soon</option>
             </select></div>
-            <button onclick="orderFF()">Order via WhatsApp</button>`;
+            <button onclick="orderFF()">Order Via WhatsApp</button>`;
           break;
         case 'mlbb':
           formHTML = `
@@ -95,9 +191,25 @@
             <div class="form-group"><input type="text" id="server" placeholder="ID Server"></div>
             <div class="form-group"><input type="text" id="nickname" placeholder="Nickname"></div>
             <div class="form-group"><select id="jumlah">
-              <option value="5">5 Diamond - Rp. 1000</option>
+              <option value="">Pilih Jumlah Diamond </option>
+              <option value="44">44 Diamond - Rp. 12K</option>
+              <option value="59">59 Diamond - Rp. 16.5K</option>
+              <option value="85">85 Diamond - Rp. 23.5K</option>
+              <option value="113">113 Diamond - Rp. 31.5K</option>
+              <option value="170">170 Diamond - Rp. 46K</option>
+              <option value="240">240 Diamond - Rp. 65K</option>
+              <option value="284">284 Diamond - Rp. 75.5K</option>
+              <option value="355">355 Diamond - Rp. 95K</option>
+              <option value="568">568 Diamond - Rp. 145K</option>
+              <option value="875">875 Diamond - Rp. 225K</option>
+              <option value="1050">1050 Diamond - Rp. 268K</option>
+              <option value="1443">1443 Diamond - Rp. 368K</option>
+              <option value="1750">1750 Diamond - Rp. 439K</option>
+              <option value="Weekly Diamond Pass 1×">Weekly Diamond Pass 1× - Rp. 27.5K</option>
+              <option value="Weekly Diamond Pass 2×">Weekly Diamond Pass 2× - Rp. 54.5K</option>
+              <option value="Weekly Diamond Pass 3×">Weekly Diamond Pass 3× - Rp. 83.5K</option>
             </select></div>
-            <button onclick="orderMLBB()">Order via WhatsApp</button>`;
+            <button onclick="orderMLBB()">Order Via WhatsApp</button>`;
           break;
         case 'pubg':
           formHTML = `
@@ -105,9 +217,20 @@
             <div class="form-group"><input type="text" id="id" placeholder="ID"></div>
             <div class="form-group"><input type="text" id="nickname" placeholder="Nickname"></div>
             <div class="form-group"><select id="jumlah">
-              <option value="5">5 UC - Rp. 1000</option>
-            </select></div>
-            <button onclick="orderPUBG()">Order via WhatsApp</button>`;
+              <option value="">Pilih Jumlah UC </option>
+              <option value="60">60 UC - Rp. 15K</option>
+              <option value="150">150 UC - Rp. 44.5K</option>
+              <option value="250">250 UC - Rp. 63.5K</option>
+              <option value="300">300 UC - Rp. 72.5K</option>
+              <option value="500">500 UC - Rp. 116K</option>
+              <option value="750">750 UC - Rp. 150K</option>
+              <option value="1000">1000 UC - Rp. 227.5K</option>
+              <option value="1250">1250 UC - Rp. 268K</option>
+              <option value="1500">1500 UC - Rp. 326.5K</option>
+              <option value="1750">1750 UC - Rp. 358K</option>
+              <option value="2500">2500 UC - Rp. 523K</option>
+              </select></div>
+            <button onclick="orderPUBG()">Order Via WhatsApp</button>`;
           break;
         case 'hok':
           formHTML = `
@@ -115,46 +238,119 @@
             <div class="form-group"><input type="text" id="id" placeholder="ID"></div>
             <div class="form-group"><input type="text" id="nickname" placeholder="Nickname"></div>
             <div class="form-group"><select id="jumlah">
-              <option value="5">5 Token - Rp. 1000</option>
+              <option value="">Pilih Jumlah Tokens</option>
+              <option value="80">80 Tokens - Rp. 15k</option>
+              <option value="240">240 Tokens - Rp. 45k</option>
+              <option value="400">400 Tokens - Rp. 70k</option>
+              <option value="560">560 Tokens - Rp. 105k</option>
+              <option value="800">800 Tokens - Rp. 129k</option>
+              <option value="1200">1200 Tokens - Rp. 198k</option>
+              <option value="2400">2400 Tokens - Rp. 380k</option>
+              <option value="4000">4000 Tokens - Rp. 621k</option>
             </select></div>
-            <button onclick="orderHOK()">Order via WhatsApp</button>`;
+            <button onclick="orderHOK()">Order Via WhatsApp</button>`;
+          break;
+        case 'cod':
+          formHTML = `
+            <h2>Top Up CP COD Mobile</h2>
+            <div class="form-group"><input type="text" id="id" placeholder="ID"></div>
+            <div class="form-group"><input type="text" id="nickname" placeholder="Nickname"></div>
+            <div class="form-group"><select id="jumlah">
+              <option value="">Pilih Jumlah CP</option>
+              <option value="31">31 - Rp. 5k</option>
+              <option value="63">63 - Rp. 9.5k</option>
+              <option value="126">126 - Rp. 19k</option>
+              <option value="321">321 - Rp. 47k</option>
+              <option value="645">645 - Rp. 95k</option>
+              <option value="800">800 - Rp. 110k</option>
+              <option value="1373">1373 - Rp. 182k</option>
+              <option value="2060">2060 - Rp. 272k</option>
+              <option value="3564">3564 - Rp. 450k</option>
+              <option value="5619">5619 - Rp. 700k</option>
+              <option value="7858">7858 - Rp. 900k</option>
+            </select></div>
+            <button onclick="orderCOD()">Order Via WhatsApp</button>`;
           break;
       }
       document.getElementById('form-container').innerHTML = formHTML;
     }
 
     function orderFF() {
-      const id = document.getElementById('id').value;
-      const nickname = document.getElementById('nickname').value;
-      const jumlah = document.getElementById('jumlah').value;
-      const pesan = `TOP UP DIAMOND FREE FIRE\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA DIAMOND : Rp. 1000\nJUMBLAH DIAMOND: ${jumlah} 💎\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
-      window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
-    }
+  const id = document.getElementById('id').value;
+  const nickname = document.getElementById('nickname').value;
+  const select = document.getElementById('jumlah');
+  const jumlah = select.value;
+  const harga = select.options[select.selectedIndex].text.split('-')[1].trim();
+  const pesan = `TOP UP DIAMOND FREE FIRE\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA DIAMOND : ${harga}\nJUMLAH DIAMOND: ${jumlah} 💎\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
+  window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
+}
 
-    function orderMLBB() {
-      const id = document.getElementById('id').value;
-      const server = document.getElementById('server').value;
-      const nickname = document.getElementById('nickname').value;
-      const jumlah = document.getElementById('jumlah').value;
-      const pesan = `TOP UP DIAMOND MOBILE LEGENDS\nID : ${id}\nID SERVER : ${server}\nNICKNAME : ${nickname}\n\nHARGA DIAMOND : Rp. 1000\nJUMBLAH DIAMOND: ${jumlah} 💎\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
-      window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
-    }
+function orderMLBB() {
+  const id = document.getElementById('id').value;
+  const server = document.getElementById('server').value;
+  const nickname = document.getElementById('nickname').value;
+  const select = document.getElementById('jumlah');
+  const jumlah = select.value;
+  const harga = select.options[select.selectedIndex].text.split('-')[1].trim();
+  const pesan = `TOP UP DIAMOND MOBILE LEGENDS\nID : ${id}\nID SERVER : ${server}\nNICKNAME : ${nickname}\n\nHARGA DIAMOND : ${harga}\nJUMLAH DIAMOND: ${jumlah} 💎\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
+  window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
+}
 
-    function orderPUBG() {
-      const id = document.getElementById('id').value;
-      const nickname = document.getElementById('nickname').value;
-      const jumlah = document.getElementById('jumlah').value;
-      const pesan = `TOP UP UC PUBG MOBILE\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA UC : Rp. 1000\nJUMBLAH UC: ${jumlah} 💴\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
-      window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
-    }
+function orderPUBG() {
+  const id = document.getElementById('id').value;
+  const nickname = document.getElementById('nickname').value;
+  const select = document.getElementById('jumlah');
+  const jumlah = select.value;
+  const harga = select.options[select.selectedIndex].text.split('-')[1].trim();
+  const pesan = `TOP UP UC PUBG MOBILE\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA UC : ${harga}\nJUMLAH UC: ${jumlah} 💴\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA UC SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
+  window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
+}
 
-    function orderHOK() {
-      const id = document.getElementById('id').value;
-      const nickname = document.getElementById('nickname').value;
-      const jumlah = document.getElementById('jumlah').value;
-      const pesan = `TOP UP TOKEN HONOR OF KINGS\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA TOKEN : Rp. 1000\nJUMBLAH TOKEN: ${jumlah} 💷\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA DIAMOND SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
-      window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
-    }
+function orderHOK() {
+  const id = document.getElementById('id').value;
+  const nickname = document.getElementById('nickname').value;
+  const select = document.getElementById('jumlah');
+  const jumlah = select.value;
+  const harga = select.options[select.selectedIndex].text.split('-')[1].trim();
+  const pesan = `TOP UP TOKEN HONOR OF KINGS\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA TOKEN : ${harga}\nJUMLAH TOKENS: ${jumlah} 💷\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA TOKEN SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
+  window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
+}
+
+function orderCOD() {
+  const id = document.getElementById('id').value;
+  const nickname = document.getElementById('nickname').value;
+  const select = document.getElementById('jumlah');
+  const jumlah = select.value;
+  const harga = select.options[select.selectedIndex].text.split('-')[1].trim();
+  const pesan = `TOP UP CP COD MOBILE\nID : ${id}\nNICKNAME : ${nickname}\n\nHARGA CP: ${harga}\nJUMLAH CP: ${jumlah} 🪙\nSTATUS DONE\n\nNOTE............\n(SCREENSHOT/SS JIKA CP SUDAH MASUK)\n\nTERIMAKASIH TELAH TOP UP DI LOX TOP UP, BERKAH SELALU😇\n\nBY: LOX TOP UP`;
+  window.open(`https://wa.me/6281295363944?text=${encodeURIComponent(pesan)}`);
+}
   </script>
+   <footer style="margin-top: 50px; text-align: center; font-size: 14px; color: #;">
+    <p><strong>!!! List Harga Top Up !!!</strong></p>
+    <div class="harga-scroll">
+      <div class="harga-card">
+        <img src="https://files.catbox.moe/1z1q57.png" alt>
+      </div>
+      <div class="harga-card">
+        <img src="https://files.catbox.moe/dcvryj.png" alt>
+      </div>
+      <div class="harga-card">
+        <img src="https://files.catbox.moe/56yyv9.png" alt>
+      </div>
+      <div class="harga-card">
+        <img src="https://files.catbox.moe/vz65t8.png" alt>
+      </div>
+      <div class="harga-card">
+        <img src="https://files.catbox.moe/z25zb1.png" alt>
+      </div>
+    </div>
+    <p>Terima kasih telah menggunakan layanan <strong>LOX TOP UP</strong>!</p>
+    <p>Semoga harimu menyenangkan dan penuh kemenangan!</p>
+  </footer>
 </body>
 </html>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+  <a href="https://www.tiktok.com/@lox_top_up1?_t=ZS-8vP5LU9XjFo&_r=1" target="_blank" style="background-color:#2c2c2c; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">TikTok</a>
+</div>
+<p>©Faldi</p>
